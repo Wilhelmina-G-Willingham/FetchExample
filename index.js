@@ -3,6 +3,23 @@ const fetchButton = document.getElementById("fetchButton");
 const urlTextBox = document.getElementById("urlTextBox");
 const dataResultArea = document.getElementById("mainResults");
 
+//variables for location pull
+let url = "https://api.open-meteo.com/v1/forecast?latitude=-27.859770&longitude=153.387820&current=temperature_2m";
+let lat = -27.875;
+let lon = 153.375;
+
+
+//Get latlon and fill URL  
+function success(pos) {
+    const crd = pos.coords;
+    lat = crd.latitude;
+    lon = crd.longitude;
+    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`
+
+    getRequest(url);
+
+  }
+
 // Make a GET api request
 async function getRequest(someURL) {
     // clear out the data printout area of the html page
@@ -29,8 +46,9 @@ async function getRequest(someURL) {
 
 // Make the GET request when the fetch button is clicked
 fetchButton.addEventListener('click', async (event) => {
-    // fetch whatever URL has been typed into textbox
-    let url = urlTextBox.value;
+    
+    navigator.geolocation.getCurrentPosition(success);
+
     let data = await getRequest(url);
     // Do something else with 'data' if you want
 });
@@ -42,3 +60,8 @@ urlTextBox.addEventListener('change', async (event) => {
     let data = await getRequest(url);
     // Do something else with 'data' if you want
 });
+
+
+
+  
+  
