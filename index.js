@@ -1,6 +1,6 @@
 // make variables for the html elements
 const fetchButton = document.getElementById("fetchButton");
-const urlTextBox = document.getElementById("urlTextBox");
+//const urlTextBox = document.getElementById("urlTextBox");
 const dataResultArea = document.getElementById("mainResults");
 
 //variables for location pull
